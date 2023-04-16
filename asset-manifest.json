@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/greninja-file-dump/static/css/main.073c9b0a.css",
+    "main.js": "/greninja-file-dump/static/js/main.5e694ada.js",
+    "index.html": "/greninja-file-dump/index.html",
+    "main.073c9b0a.css.map": "/greninja-file-dump/static/css/main.073c9b0a.css.map",
+    "main.5e694ada.js.map": "/greninja-file-dump/static/js/main.5e694ada.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.5e694ada.js"
+  ]
+}
