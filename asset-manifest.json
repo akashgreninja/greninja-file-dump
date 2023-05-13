@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/greninja-file-dump/static/css/main.1dfb32c5.css",
-    "main.js": "/greninja-file-dump/static/js/main.c2c00d27.js",
+    "main.js": "/greninja-file-dump/static/js/main.0f3fd525.js",
     "index.html": "/greninja-file-dump/index.html",
     "main.1dfb32c5.css.map": "/greninja-file-dump/static/css/main.1dfb32c5.css.map",
-    "main.c2c00d27.js.map": "/greninja-file-dump/static/js/main.c2c00d27.js.map"
+    "main.0f3fd525.js.map": "/greninja-file-dump/static/js/main.0f3fd525.js.map"
   },
   "entrypoints": [
     "static/css/main.1dfb32c5.css",
-    "static/js/main.c2c00d27.js"
+    "static/js/main.0f3fd525.js"
   ]
 }
