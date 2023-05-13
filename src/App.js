@@ -7,44 +7,82 @@ function App() {
   const [image, setimage] = useState("");
   const [loading, setloading] = useState(false);
   const [done, setdone] = useState(false);
+  const [images, setImages] = useState([]);
+
   const handleFile = (e) => {
-    if (e.target.files && e.target.files.length === 1) {
-      setimage(e.target.files[0]);
+    if (e.target.files && e.target.files.length > 0) {
+      const fileList = Array.from(e.target.files);
+      setImages(fileList);
     }
   };
 
+  // const CreateUpload = (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const storage = getStorage();
+  //     const storageRef = ref(storage, `Akash/${image.name}`);
+  //     setloading(true);
+
+  //     uploadBytes(storageRef, image).then((snapshot) => {
+  //       getDownloadURL(storageRef).then((url) => {
+  //         setimage(url);
+  //       });
+  //       console.log("here");
+
+  //       setloading(false);
+  //       setdone(true);
+  //       setTimeout(() => {
+  //         setdone(false);
+  //       }, 3000);
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   const CreateUpload = (e) => {
     e.preventDefault();
     try {
       const storage = getStorage();
-      const storageRef = ref(storage, `Akash/${image.name}`);
       setloading(true);
-
-      uploadBytes(storageRef, image).then((snapshot) => {
-        getDownloadURL(storageRef).then((url) => {
-          setimage(url);
-        });
-        console.log("here");
-
-        setloading(false);
-        setdone(true);
-        setTimeout(() => {
-          setdone(false);
-        }, 3000);
+  
+      const uploadPromises = images.map((image) => {
+        const storageRef = ref(storage, `Akash/${image.name}`);
+        return uploadBytes(storageRef, image);
       });
+  
+      Promise.all(uploadPromises)
+        .then((snapshots) => {
+          const downloadPromises = snapshots.map((snapshot) => {
+            const storageRef = snapshot.ref;
+            return getDownloadURL(storageRef);
+          });
+  
+          return Promise.all(downloadPromises);
+        })
+        .then((urls) => {
+          setImages(urls);
+          console.log("here");
+  
+          setloading(false);
+          setdone(true);
+          setTimeout(() => {
+            setdone(false);
+          }, 3000);
+        });
     } catch (e) {
       console.log(e);
     }
   };
+  
 
   return (
     <center>
       <div className="App">
-        <h1>GRENINJA FILE DUMP</h1>
+        <h1>GRENINJA FILE DUMP v2.0</h1>
         <form>
           <input
             type="file"
-            webkitdirectory
+            multiple
             onChange={handleFile}
             accept="*/*"
             name="photo"
